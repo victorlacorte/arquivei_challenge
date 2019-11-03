@@ -34,27 +34,25 @@ const theme = {
       main: '#091223',
       dark: '#0000002',
     },
-    grey: {
-      100: {
-        light: '#f5f5f530',
-        main: '#f5f5f5',
-        dark: '#c2c2c2',
-      },
-      200: {
-        light: '#eeeeee30',
-        main: '#eeeeee',
-        dark: '#bcbcbc',
-      },
-      300: {
-        light: '#e0e0e030',
-        main: '#e0e0e0',
-        dark: '#aeaeae',
-      },
-      400: {
-        light: '#bdbdbd30',
-        main: '#bdbdbd',
-        dark: '#8d8d8d',
-      },
+    grey100: {
+      light: '#f5f5f530',
+      main: '#f5f5f5',
+      dark: '#c2c2c2',
+    },
+    grey200: {
+      light: '#eeeeee30',
+      main: '#eeeeee',
+      dark: '#bcbcbc',
+    },
+    grey300: {
+      light: '#e0e0e030',
+      main: '#e0e0e0',
+      dark: '#aeaeae',
+    },
+    grey400: {
+      light: '#bdbdbd30',
+      main: '#bdbdbd',
+      dark: '#8d8d8d',
     },
   },
   typography: {
