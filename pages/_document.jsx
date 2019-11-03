@@ -1,9 +1,10 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+
 import theme from 'commons/styles/theme';
 
-export default class MyDocument extends Document {
+class MyDocument extends Document {
   render() {
     return (
       <html lang="en">
@@ -14,7 +15,7 @@ export default class MyDocument extends Document {
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
           />
           {/* PWA primary color */}
-          <meta name="theme-color" content={theme.palette.primary.main} />
+          <meta name="theme-color" content={theme.palette.primary} />
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel="stylesheet" href="/normalize.css" />
           <link rel="stylesheet" href="/fonts/roboto.css" />
@@ -81,3 +82,5 @@ MyDocument.getInitialProps = async (ctx) => {
     sheet.seal();
   }
 };
+
+export default MyDocument;
