@@ -1,10 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect } from 'react';
+import Router from 'next/router';
 
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.palette.primary.main};
-  font-family: ${({ theme }) => theme.typography.font.Rubik};
-`;
+import Consults from './consults';
 
-export default () => <Title>My page</Title>;
+// Our index simply redirects to the /consults page, where all action will happen.
+function Index() {
+  useEffect(() => {
+    Router.replace('/index', '/consults', { shallow: true });
+  }, []);
+
+  return <Consults />;
+}
+
+export default Index;
