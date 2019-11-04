@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
 
+// TODO sticky position is possible
 const StyledHeader = styled.header`
   position: relative;
   background-color: ${({ theme }) => theme.palette.primary.main};
@@ -18,6 +19,7 @@ const StyledImg = styled.img`
   top: 50%;
   transform: translate(0, -50%);
   width: 30%;
+  max-width: 368px;
   height: auto;
 
   ${({ theme }) => theme.breakpoints.down('sm')`
