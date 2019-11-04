@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled, { css } from 'styled-components';
 
 // TODO add proptype validation? Also needs to be tested
@@ -47,4 +48,4 @@ const StyledButton = styled.button.attrs((props) => ({
   `}
 `;
 
-export default StyledButton;
+export default memo(StyledButton);
