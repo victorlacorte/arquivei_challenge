@@ -1,49 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-/* eslint-disable react/button-has-type */
-function Button(props) {
-  const {
-    className,
-    type,
-    disabled,
-    children,
-  } = props;
-
-  return (
-    <button
-      className={className}
-      type={type}
-      disabled={disabled}
-    >
-      {children}
-    </button>
-  );
-}
-
-Button.defaultProps = {
-  type: 'button',
-
-  disabled: false,
-};
-
-Button.propTypes = {
-  className: PropTypes.string.isRequired,
-
-  type: PropTypes.oneOf(['button', 'submit']),
-
-  disabled: PropTypes.bool,
-
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node),
-  ]).isRequired,
-};
-
-const StyledButton = styled(Button).attrs(({ variant, color }) => ({
-  variant: variant || 'contained',
-  color: color || 'primary',
+// TODO add proptype validation? Also needs to be tested
+const StyledButton = styled.button.attrs((props) => ({
+  type: props.type || 'button',
+  disabled: props.disabled || false,
+  variant: props.variant || 'contained',
+  color: props.color || 'primary',
 }))`
   box-sizing: border-box;
   min-height: 40px;
@@ -60,7 +22,7 @@ const StyledButton = styled(Button).attrs(({ variant, color }) => ({
     ${theme.typography.button};
   `}
 
-  ${({ variant, color }) => variant === 'contained' && css`
+  ${({ disabled, variant, color }) => !disabled && variant === 'contained' && css`
     background-color: ${({ theme }) => theme.palette[color].main};
 
     :hover {
@@ -68,7 +30,7 @@ const StyledButton = styled(Button).attrs(({ variant, color }) => ({
     }
   `}
 
-  ${({ variant, color }) => variant === 'outlined' && css`
+  ${({ disabled, variant, color }) => !disabled && variant === 'outlined' && css`
     background-color: white;
     border: 2px solid ${({ theme }) => theme.palette[color].main};
     color: ${({ theme }) => theme.palette[color].main};
@@ -81,7 +43,7 @@ const StyledButton = styled(Button).attrs(({ variant, color }) => ({
   ${({ disabled }) => disabled && css`
     pointer-events: none;
     cursor: default;
-    background-color: ${({ theme }) => theme.palette.grey[400]};
+    background-color: ${({ theme }) => theme.palette.grey400.main};
   `}
 `;
 
