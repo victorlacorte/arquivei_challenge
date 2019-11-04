@@ -12,7 +12,7 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <fragment>
+      <>
         <Head>
           <title>Arquivei FE Challenge</title>
         </Head>
@@ -22,7 +22,7 @@ class MyApp extends App {
             <Component {...pageProps} />
           </Main>
         </ThemeProvider>
-      </fragment>
+      </>
     );
   }
 }

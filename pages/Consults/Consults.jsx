@@ -10,7 +10,7 @@ import PurchaseSummary from './components/PurchaseSummary';
 //   ))));
 
 const Consults = () => (
-  <fragment>
+  <>
     <PurchaseSummary
       totalKeys={10}
       keyUnitPrice={0.24}
@@ -20,7 +20,7 @@ const Consults = () => (
     />
 
     <Button>Comprar</Button>
-  </fragment>
+  </>
 );
 
 export default Consults;

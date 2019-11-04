@@ -54,7 +54,7 @@ const PurchaseSummary = (props) => {
 
       {discountedTotal
         ? (
-          <fragment>
+          <>
             <OriginalTotal>
               De:
               <span>
@@ -73,7 +73,7 @@ const PurchaseSummary = (props) => {
                 % off)
               </span>
             </DiscountedTotal>
-          </fragment>
+          </>
         )
         : (
           <Total>
