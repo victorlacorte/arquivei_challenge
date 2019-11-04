@@ -1,8 +1,17 @@
+import { down, up } from './utils';
+
 const Roboto = 'Roboto, sans-serif';
 const Rubik = 'Rubik, sans-serif';
 
 // https://material.io/resources/color/#!/?view.left=0&view.right=1
-const theme = {
+const baseTheme = {
+  breakpoints: {
+    xs: 0,
+    sm: 600,
+    md: 960,
+    lg: 960,
+    xl: 960,
+  },
   palette: {
     primary: {
       light: '#4076fa30',
@@ -93,6 +102,16 @@ const theme = {
       fontSize: 16,
       lineHeight: 1,
     },
+  },
+};
+
+const theme = {
+  ...baseTheme,
+
+  breakpoints: {
+    ...baseTheme.breakpoints,
+    down: (breakpoint) => down(breakpoint, baseTheme),
+    up: (breakpoint) => up(breakpoint, baseTheme),
   },
 };
 
