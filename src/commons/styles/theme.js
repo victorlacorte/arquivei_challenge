@@ -65,6 +65,10 @@ const baseTheme = {
     },
   },
   typography: {
+    fontFamily: {
+      Roboto,
+      Rubik,
+    },
     h1: {
       fontFamily: Rubik,
       fontWeight: 900,
@@ -81,13 +85,13 @@ const baseTheme = {
       fontFamily: Rubik,
       fontWeight: 400,
       fontSize: 18,
-      lineHeight: 27,
+      lineHeight: 1,
     },
     body2: {
       fontFamily: Roboto,
       fontWeight: 400,
       fontSize: 18,
-      lineHeight: 27,
+      lineHeight: 1,
     },
     button: {
       fontFamily: Roboto,
@@ -102,6 +106,9 @@ const baseTheme = {
       fontSize: 16,
       lineHeight: 1,
     },
+  },
+  zIndex: {
+    header: 1000,
   },
 };
 
