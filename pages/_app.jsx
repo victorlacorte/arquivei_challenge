@@ -3,6 +3,8 @@ import App from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
 
+import Header from 'components/Header';
+import Main from 'components/Main';
 import theme from 'commons/styles/theme';
 
 class MyApp extends App {
@@ -15,7 +17,10 @@ class MyApp extends App {
           <title>Arquivei FE Challenge</title>
         </Head>
         <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
+          <Header />
+          <Main>
+            <Component {...pageProps} />
+          </Main>
         </ThemeProvider>
       </fragment>
     );
