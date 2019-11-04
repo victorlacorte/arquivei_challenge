@@ -15,7 +15,7 @@ class MyDocument extends Document {
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
           />
           {/* PWA primary color */}
-          <meta name="theme-color" content={theme.palette.primary} />
+          <meta name="theme-color" content={theme.palette.primary.main} />
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel="stylesheet" href="/normalize.css" />
           <link rel="stylesheet" href="/fonts/roboto.css" />
@@ -25,6 +25,7 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap"
           /> */}
+
           {/* <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Rubik:400,500,700,900&display=swap"
