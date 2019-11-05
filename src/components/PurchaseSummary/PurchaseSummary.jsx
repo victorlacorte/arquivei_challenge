@@ -84,12 +84,6 @@ const PurchaseSummary = (props) => {
   );
 };
 
-PurchaseSummary.defaultProps = {
-  discountedTotal: null,
-
-  percentageDiscount: null,
-};
-
 PurchaseSummary.propTypes = {
   totalKeys: PropTypes.number.isRequired,
 
@@ -97,9 +91,9 @@ PurchaseSummary.propTypes = {
 
   originalTotal: PropTypes.number.isRequired,
 
-  discountedTotal: PropTypes.number,
+  discountedTotal: PropTypes.number.isRequired,
 
-  percentageDiscount: PropTypes.number,
+  percentageDiscount: PropTypes.number.isRequired,
 };
 
 export default PurchaseSummary;
