@@ -1,1 +1,1 @@
-export { default } from './Consults';
+export { default } from './ConsultsContainer';
