@@ -15,9 +15,9 @@ import {
 
 const PurchaseSummary = (props) => {
   const {
-    totalKeys,
+    consultKeys,
     keyUnitPrice,
-    originalTotal,
+    total,
     discountedTotal,
     percentageDiscount,
   } = props;
@@ -38,7 +38,7 @@ const PurchaseSummary = (props) => {
 
         <tbody>
           <tr>
-            <td>{totalKeys}</td>
+            <td>{consultKeys}</td>
             <td>
               {toBRL(keyUnitPrice)}
             </td>
@@ -58,7 +58,7 @@ const PurchaseSummary = (props) => {
             <OriginalTotal>
               De:
               <span>
-                {toBRL(originalTotal)}
+                {toBRL(total)}
               </span>
             </OriginalTotal>
 
@@ -77,7 +77,7 @@ const PurchaseSummary = (props) => {
         )
         : (
           <Total>
-            {toBRL(originalTotal)}
+            {toBRL(total)}
           </Total>
         )}
     </Receipt>
@@ -85,11 +85,11 @@ const PurchaseSummary = (props) => {
 };
 
 PurchaseSummary.propTypes = {
-  totalKeys: PropTypes.number.isRequired,
+  consultKeys: PropTypes.number.isRequired,
 
   keyUnitPrice: PropTypes.number.isRequired,
 
-  originalTotal: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
 
   discountedTotal: PropTypes.number.isRequired,
 

@@ -16,7 +16,7 @@ class MyDocument extends Document {
           />
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="shortcut icon" href="/images/favicon.ico" />
           <link rel="stylesheet" href="/normalize.css" />
           <link rel="stylesheet" href="/fonts/roboto.css" />
           <link rel="stylesheet" href="/fonts/rubik.css" />

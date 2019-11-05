@@ -12,9 +12,9 @@ import PurchaseSummary from 'components/PurchaseSummary';
 // TODO design the components structure; should be done already
 function Consults(props) {
   const {
-    totalKeys,
+    consultKeys,
     keyUnitPrice,
-    originalTotal,
+    total,
     discountedTotal,
     percentageDiscount,
   } = props;
@@ -22,11 +22,17 @@ function Consults(props) {
   return (
     <>
       <PurchaseSummary
-        totalKeys={totalKeys}
+        consultKeys={consultKeys}
+
         keyUnitPrice={keyUnitPrice}
-        originalTotal={originalTotal}
-        discountedTotal={discountedTotal}
-        percentageDiscount={percentageDiscount}
+        total={120}
+        discountedTotal={100}
+        percentageDiscount={10}
+
+        // keyUnitPrice={0.24}
+        // total={240}
+        // discountedTotal={136}
+        // percentageDiscount={7}
       />
 
       <Button>Comprar</Button>

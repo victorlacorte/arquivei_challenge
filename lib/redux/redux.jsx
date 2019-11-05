@@ -4,10 +4,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import App from 'next/app';
 import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { initializeStore } from '../store';
+import rootReducer from './reducers';
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 let reduxStore;
+
+function initializeStore() {
+  return createStore(
+    rootReducer,
+    composeWithDevTools(applyMiddleware()),
+  );
+}
 
 function getOrInitializeStore(initialState) {
   // Always make a new store if server, otherwise state is shared between requests
@@ -19,6 +30,8 @@ function getOrInitializeStore(initialState) {
   if (!reduxStore) {
     reduxStore = initializeStore(initialState);
   }
+
+  console.log(reduxStore.getState());
 
   return reduxStore;
 }
@@ -39,7 +52,7 @@ function withRedux(PageComponent, { ssr = true } = {}) {
   };
 
   // Make sure people don't use this HOC on _app.js level
-  if (process.env.NODE_ENV !== 'production') {
+  if (!isProduction) {
     const isAppHoc = PageComponent === App || PageComponent.prototype instanceof App;
 
     if (isAppHoc) {
@@ -48,7 +61,7 @@ function withRedux(PageComponent, { ssr = true } = {}) {
   }
 
   // Set the correct displayName in development
-  if (process.env.NODE_ENV !== 'production') {
+  if (!isProduction) {
     const displayName = PageComponent.displayName || PageComponent.name || 'Component';
 
     WithRedux.displayName = `withRedux(${displayName})`;

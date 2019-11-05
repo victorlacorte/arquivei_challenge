@@ -8,7 +8,7 @@ endpoint, we need to trigger a Redux Form's onChange event with the Field
 
 {
   "keyUnitPrice": <number>,
-  "originalTotal": <number>,
+  "total": <number>,
   "discountedTotal": <number>,
   "percentageDiscount": <number>
 }
@@ -17,7 +17,7 @@ endpoint, we need to trigger a Redux Form's onChange event with the Field
 
 {
   "keyUnitPrice": <number>,
-  "originalTotal": <number>
+  "total": <number>
 }
 
 (TODO what happens when it returns nothing at all? Maybe render a snackbar if
@@ -32,15 +32,15 @@ this information, and the order total, to another endpoint.
 
 So we can name a few actions:
 
-const SET_CONSULT_KEYS
-const CHECK_PRICE
-const COMPLETE_ORDER
+* const SET_CONSULT_KEYS
+* const CHECK_PRICE
+* const COMPLETE_ORDER
 
 Optional, but recommended:
 
-const IS_LOADING (maybe needs a timeout mechanism)
-const OPEN_SNACKBAR
-const CLOSE_SNACKBAR
+* const IS_LOADING (maybe needs a timeout mechanism)
+* const OPEN_SNACKBAR
+* const CLOSE_SNACKBAR
 
 # Explain
 
