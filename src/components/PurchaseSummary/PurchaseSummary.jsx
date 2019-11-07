@@ -38,7 +38,7 @@ const PurchaseSummary = (props) => {
 
         <tbody>
           <tr>
-            <td>{consultKeys}</td>
+            <td>{Number(consultKeys).toFixed(0)}</td>
             <td>
               {toBRL(keyUnitPrice)}
             </td>
@@ -84,16 +84,43 @@ const PurchaseSummary = (props) => {
   );
 };
 
+PurchaseSummary.defaultProps = {
+  consultKeys: 0,
+
+  keyUnitPrice: 0,
+
+  total: 0,
+
+  discountedTotal: undefined,
+
+  percentageDiscount: undefined,
+};
+
 PurchaseSummary.propTypes = {
-  consultKeys: PropTypes.number.isRequired,
+  consultKeys: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 
-  keyUnitPrice: PropTypes.number.isRequired,
+  keyUnitPrice: PropTypes.PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 
-  total: PropTypes.number.isRequired,
+  total: PropTypes.PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 
-  discountedTotal: PropTypes.number.isRequired,
+  discountedTotal: PropTypes.PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 
-  percentageDiscount: PropTypes.number.isRequired,
+  percentageDiscount: PropTypes.PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 };
 
 export default PurchaseSummary;
