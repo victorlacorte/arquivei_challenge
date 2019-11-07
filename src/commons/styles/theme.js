@@ -71,8 +71,8 @@ const baseTheme = {
     },
     h1: {
       fontFamily: Rubik,
-      fontWeight: 900,
-      fontSize: 42,
+      fontWeight: 700,
+      fontSize: 32,
       lineHeight: 1,
     },
     h2: {
@@ -95,7 +95,7 @@ const baseTheme = {
     },
     button: {
       fontFamily: Roboto,
-      fontWeight: 500,
+      fontWeight: 700,
       fontSize: 14,
       lineHeight: 1.75,
       textTransform: 'uppercase',
