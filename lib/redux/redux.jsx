@@ -31,8 +31,6 @@ function getOrInitializeStore(initialState) {
     reduxStore = initializeStore(initialState);
   }
 
-  console.log(reduxStore.getState());
-
   return reduxStore;
 }
 
