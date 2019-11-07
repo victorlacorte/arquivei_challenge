@@ -8,7 +8,7 @@ const StyledMain = styled.main`
   box-sizing: border-box;
   position: relative;
   margin: 0 auto;
-  height: calc(100vh - 92px - 60px);
+  min-height: calc(100vh - 92px - 60px);
   min-width: 320px;
   overflow: hidden;
   padding: 24px;
