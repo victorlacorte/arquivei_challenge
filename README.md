@@ -1,3 +1,6 @@
+# Usage
+Don't forget the .env file
+
 # Initial draft
 Whenever the user selects a quantity we need to consult an external endpoint
 that will return us the following (note that, in addition to consulting this
@@ -45,3 +48,96 @@ Optional, but recommended:
 # Explain
 
 Project's structure and why index.jsx is an exception
+
+# TODO
+
+* Modal
+* CreditCardForm
+* CreditCardReducer
+* Footer
+* SuccessScreen
+* Return nav button
+* Comprar button is flickering! Should only be enabled when we have an api return
+
+# A note on isomorphic-unfetch
+import fetch from 'isomorphic-unfetch';
+
+// https://developer.mozilla.org/en-US/docs/Web/API/Response
+function checkStatus(response) {
+  const { ok, ...rest } = response;
+
+  if (ok) {
+    return rest;
+  }
+
+  return Promise.reject(rest);
+}
+
+// TODO test
+function parseUrlOptions(url, options) {
+  const { params, ...otherOptions } = options;
+  let constructedUrl = url;
+
+  if (Object.keys(params).length) {
+    const urlParams = new URLSearchParams(Object.entries(params));
+    constructedUrl += `?${urlParams.toString()}`;
+  }
+
+  return [constructedUrl, otherOptions];
+}
+
+function customFetch(url, options) {
+  const [parsedUrl, parsedOptions] = parseUrlOptions(url, options);
+
+  return fetch(parsedUrl, parsedOptions)
+    .then(checkStatus);
+}
+
+export default customFetch;
+
+# Consults algorithm
+const discounts = [
+  {
+    max: 1000,
+    price: 0.09,
+  },
+  {
+    max: 1000,
+    price: 0.16,
+  },
+  {
+    max: Infinity,
+    price: 0.24,
+  },
+];
+
+/**
+ *
+ * @param {*} numberConsults
+ * @param {*} discounts
+ */
+function price(numberConsults) {
+  let total = 0;
+
+  for (let i = 0; i < discounts.length; i += 1) {
+    if (numberConsults > discounts[i].max) {
+      total += discounts[i].max * discounts[i].price;
+      numberConsults -= discounts[i].max;
+    } else {
+      return total + numberConsults * discounts[i].price;
+    }
+  }
+}
+
+import price from '../consults';
+
+describe('Consult keys discount algorithm', () => {
+  it('correctly calculates a purchase price', () => {
+    expect(price(0)).toEqual(0);
+    expect(price(2)).toEqual(0.18);
+    expect(price(1000)).toEqual(90);
+    expect(price(1024)).toEqual(93.84);
+    expect(price(2500)).toEqual(370);
+    expect(price(10000)).toEqual(2170);
+  });
+});
