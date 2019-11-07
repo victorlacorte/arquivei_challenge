@@ -109,6 +109,7 @@ const baseTheme = {
   },
   zIndex: {
     appBar: 1000,
+    modal: 1200,
   },
 };
 
