@@ -108,7 +108,7 @@ const baseTheme = {
     },
   },
   zIndex: {
-    header: 1000,
+    appBar: 1000,
   },
 };
 
