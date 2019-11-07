@@ -10,7 +10,7 @@ const Receipt = styled.div`
   border-image-width: 1;
   border-image-outset: 0;
   border-image-repeat: stretch;
-  max-height: 304px;
+  height: 264px;
 `;
 
 const Title = styled.h2`
