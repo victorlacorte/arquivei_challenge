@@ -46,6 +46,7 @@ function maxValue(max) {
   };
 }
 
+// TODO probably unnecessary
 function email(value) {
   if (value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
     return 'Email inválido';
@@ -54,7 +55,7 @@ function email(value) {
   return undefined;
 }
 
-export {
+export default {
   required,
   minLength,
   maxLength,
