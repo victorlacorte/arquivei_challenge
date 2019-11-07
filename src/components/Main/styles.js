@@ -2,17 +2,19 @@ import styled from 'styled-components';
 
 /**
  * Defines the application's max-widths and paddings.
+ * The height is calculated taking into account Header and Footer total heights
  */
-const Main = styled.main`
+const StyledMain = styled.main`
   box-sizing: border-box;
   position: relative;
   margin: 0 auto;
-  min-height: 100vh;
+  height: calc(100vh - 92px - 60px);
   min-width: 320px;
   overflow: hidden;
   padding: 24px;
 
   ${({ theme }) => theme.breakpoints.down('sm')`
+    height: calc(100vh - 56px - 40px);
     padding: 12px;
   `}
 
@@ -33,4 +35,4 @@ const Main = styled.main`
   `}
 `;
 
-export default Main;
+export default StyledMain;
