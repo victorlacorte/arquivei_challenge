@@ -1,36 +1,40 @@
 import types from './types';
 
 const INITIAL_STATE = {
-  consultKeys: 0,
+  keysAmount: 0,
   consultKeysInfo: {
     keyUnitPrice: 0,
     total: 0,
   },
   loading: false,
+  error: false,
 };
 
 function consultReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case types.SET_CONSULT_KEYS: {
+    case types.REQUEST_CONSULT_INFO: {
       return {
         ...state,
-        consultKeys: action.consultKeys,
-      };
-    }
-
-    // TODO notice we didn't include any action parameter here
-    case types.REQUEST_CONSULT_KEYS_PRICE: {
-      return {
-        ...state,
+        keysAmount: Number(action.keysAmount),
         loading: true,
       };
     }
 
-    case types.RECEIVE_CONSULT_KEYS_PRICE: {
+    case types.RECEIVE_CONSULT_INFO: {
       return {
         ...state,
-        consultKeysInfo: action.consultKeysInfo,
+        consultKeysInfo: action.info,
         loading: false,
+        error: false,
+      };
+    }
+
+    case types.SET_INVALID_CONSULT_INFO: {
+      return {
+        ...state,
+        consultKeysInfo: action.info,
+        loading: false,
+        error: true,
       };
     }
 
