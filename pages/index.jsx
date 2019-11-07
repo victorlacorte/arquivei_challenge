@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import Router from 'next/router';
 
-import Consults from './consults';
+import Consult from './consult';
 
-// Our index simply redirects to the /consults page, where all action will happen.
+// Our index simply redirects to the /consults page, where the initial action will happen.
 function Index() {
   useEffect(() => {
-    Router.replace('/index', '/consults', { shallow: true });
+    Router.replace('/index', '/consult', { shallow: true });
   }, []);
 
-  return <Consults />;
+  return <Consult />;
 }
 
 export default Index;
