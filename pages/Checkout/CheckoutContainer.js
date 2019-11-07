@@ -39,8 +39,13 @@ function mapDispatchToProps(dispatch) {
     checkoutOperations.checkout(dispatch, total, userInfo);
   }
 
+  function resetCheckout() {
+    checkoutOperations.resetCheckout(dispatch);
+  }
+
   return {
     checkout,
+    resetCheckout,
   };
 }
 

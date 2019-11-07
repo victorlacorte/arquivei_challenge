@@ -5,6 +5,7 @@ import creators from './actions';
 const {
   receiveCheckoutSuccess,
   requestCheckout,
+  resetState,
   setCheckoutError,
 } = creators;
 
@@ -20,6 +21,11 @@ function checkout(dispatch, total, userInfo) {
     });
 }
 
+function resetCheckout(dispatch) {
+  dispatch(resetState());
+}
+
 export default {
   checkout,
+  resetCheckout,
 };
