@@ -7,7 +7,10 @@ import Button from 'components/Button';
 import Input from 'components/Input';
 import PurchaseSummary from 'components/PurchaseSummary';
 import useDebounce from 'commons/utils/useDebounce';
-import { formValidations } from 'commons/utils/validations';
+import {
+  consultKeysValidations,
+  formValidations,
+} from 'commons/utils/validations';
 
 import {
   Title,
@@ -15,14 +18,6 @@ import {
   PanelDiv,
   ButtonContainer,
 } from './styles';
-
-function normalizeConsultKeys(value, maxValue) {
-  if (value > maxValue) {
-    return maxValue;
-  }
-
-  return value;
-}
 
 const minValue200 = formValidations.minValue(200);
 
@@ -34,6 +29,7 @@ const defaultConsultKeysInfo = {
 };
 
 // TODO tratar serviço indisponível
+// TODO botão para submeter: se a store já possuir um valor, o botão não ficará mais disabled
 function Consults(props) {
   const {
     // form props
@@ -85,7 +81,7 @@ function Consults(props) {
               formValidations.required,
               minValue200,
             ]}
-            normalize={(value) => normalizeConsultKeys(value, 1000000)}
+            normalize={(value) => consultKeysValidations.normalizeConsultKeys(value, 1000000)}
           />
         </PanelDiv>
 
