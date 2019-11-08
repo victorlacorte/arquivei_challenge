@@ -1,5 +1,3 @@
-// TODO sanitize these functions and remove unnecessary ones
-
 function required(value) {
   if (value) {
     return undefined;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { toBRL } from 'commons/utils/formatting';
+import toBRL from 'commons/utils/formatting';
 
 import {
   DiscountedTotal,
