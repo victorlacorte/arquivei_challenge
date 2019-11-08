@@ -30,6 +30,7 @@ function checkoutReducer(state = INITIAL_STATE, action) {
     case types.SET_CHECKOUT_ERROR: {
       return {
         ...state,
+        loading: false,
         error: true,
       };
     }
@@ -39,3 +40,4 @@ function checkoutReducer(state = INITIAL_STATE, action) {
 }
 
 export default checkoutReducer;
+export { INITIAL_STATE };
