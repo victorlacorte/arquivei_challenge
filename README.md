@@ -139,7 +139,7 @@ middlewares were added (due to the project's simplicity), but [Redux
 Thunk](https://github.com/reduxjs/redux-thunk) would be a good addition in
 order to further extend this demo and better accommodate Redux side effects
 logic as well as debounce actions more easily (notice the cumbersume but
-effective `useDebouce` hook on `src/commons/utils;useDebouce.js`: it exists
+effective `useDebouce` hook on `src/commons/utils/useDebouce.js`: it exists
 since the `/consult` user expectes dynamism between specifying a consult keys
 amount and receiving the (mocked) purchase price, but dispatching requests
 `onChange` would be a terrible idea since we could easily receive responses out
