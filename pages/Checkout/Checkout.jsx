@@ -84,9 +84,10 @@ function CheckoutForm(props) {
             <Field
               component={Input}
               name="creditCardNumber"
-              type="number"
+              type="text"
               label="Número do cartão de crédito"
               placeholder="Apenas números"
+              normalize={formValidations.normalizeAsNumber}
               validate={[
                 formValidations.required,
               ]}
@@ -108,7 +109,7 @@ function CheckoutForm(props) {
             <Field
               component={Input}
               name="creditCardCVV"
-              type="number"
+              type="text"
               label="CVV"
               placeholder="Apenas números"
               normalize={creditCardValidations.normalizeCVV}

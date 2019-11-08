@@ -63,6 +63,8 @@ General form philosophy: no maxLength, normalize to achieve this result
 * Não consigo desabilitar o overflow do body quando a modal é aberta :(
 * Modal de erros!
 * Padronizar os components (styles, etc)
+* Refazer o mock com o valor dos descontos
+* Remover o typo number do cartão de crédito e do
 
 # A note on isomorphic-unfetch
 import fetch from 'isomorphic-unfetch';
