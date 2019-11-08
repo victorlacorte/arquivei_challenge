@@ -142,19 +142,9 @@ function CheckoutForm(props) {
           </Button>
 
           <Button
-            color="error"
-            onClick={() => {
-              // limpar o contexto antes de voltar
-              resetCheckout();
-            }}
-          >
-            Reset
-          </Button>
-
-          <Button
             color="success"
             type="submit"
-            disabled={pristine || invalid || submitting}
+            disabled={pristine || invalid || submitting || loading}
           >
             Finalizar compra
           </Button>

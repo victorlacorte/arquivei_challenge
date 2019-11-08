@@ -23,7 +23,7 @@ function checkoutReducer(state = INITIAL_STATE, action) {
       };
     }
 
-    case types.RESET_STATE: {
+    case types.RESET_CHECKOUT_STATE: {
       return INITIAL_STATE;
     }
 

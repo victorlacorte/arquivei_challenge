@@ -20,7 +20,7 @@ function setCheckoutError() {
 
 function resetState() {
   return {
-    type: types.RESET_STATE,
+    type: types.RESET_CHECKOUT_STATE,
   };
 }
 
