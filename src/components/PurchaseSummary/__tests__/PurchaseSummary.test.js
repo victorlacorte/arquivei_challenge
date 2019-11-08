@@ -5,7 +5,6 @@ import { shallowWithTheme } from 'commons/utils/testUtils';
 
 describe('<PurchaseSummary />', () => {
   it('creates a PurchaseSummary component', () => {
-    // eslint-disable-next-line react/jsx-filename-extension
     const wrapper = shallowWithTheme(<PurchaseSummary />);
 
     // Default values have no discount
