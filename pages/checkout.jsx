@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Router from 'next/router';
 
 import withRedux from 'lib/redux';
@@ -21,6 +22,10 @@ function CheckoutPage(props) {
 
   return <Checkout />;
 }
+
+CheckoutPage.propTypes = {
+  redirect: PropTypes.bool.isRequired,
+};
 
 CheckoutPage.getInitialProps = (ctx) => {
   const { reduxStore } = ctx;
