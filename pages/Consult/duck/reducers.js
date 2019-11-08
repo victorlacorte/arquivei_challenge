@@ -47,3 +47,4 @@ function consultReducer(state = INITIAL_STATE, action) {
 }
 
 export default consultReducer;
+export { INITIAL_STATE };
