@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled, { css } from 'styled-components';
 
-const StyledDiv = styled.div`
+const StyledContainer = styled.div`
   height: 104px;
 `;
 
@@ -63,13 +63,13 @@ function Input(props) {
   } = props;
 
   return (
-    <StyledDiv>
+    <StyledContainer>
       <StyledTitle htmlFor="formInput">{label}</StyledTitle>
       <div>
         <StyledInput {...input} id="formInput" placeholder={placeholder} type={type} error={error} />
         {touched && ((error && <StyledP>{error}</StyledP>) || (warning && <StyledP>{warning}</StyledP>))}
       </div>
-    </StyledDiv>
+    </StyledContainer>
   );
 }
 
