@@ -10,11 +10,12 @@ const Receipt = styled.div`
   border-image-width: 1;
   border-image-outset: 0;
   border-image-repeat: stretch;
+  height: 264px;
 `;
 
 const Title = styled.h2`
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 
   ${({ theme }) => css`
       ${theme.typography.h2};
@@ -25,6 +26,7 @@ const Hr = styled.hr`
   border-style: dashed;
   border-color: ${({ theme }) => theme.palette.grey100.dark};
   margin-bottom: 24px;
+  width: 100%;
 `;
 
 // TODO set Table's max-width

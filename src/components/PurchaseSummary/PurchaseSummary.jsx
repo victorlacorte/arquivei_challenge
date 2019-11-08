@@ -15,9 +15,9 @@ import {
 
 const PurchaseSummary = (props) => {
   const {
-    totalKeys,
+    consultKeys,
     keyUnitPrice,
-    originalTotal,
+    total,
     discountedTotal,
     percentageDiscount,
   } = props;
@@ -38,7 +38,7 @@ const PurchaseSummary = (props) => {
 
         <tbody>
           <tr>
-            <td>{totalKeys}</td>
+            <td>{Number(consultKeys).toFixed(0)}</td>
             <td>
               {toBRL(keyUnitPrice)}
             </td>
@@ -58,7 +58,7 @@ const PurchaseSummary = (props) => {
             <OriginalTotal>
               De:
               <span>
-                {toBRL(originalTotal)}
+                {toBRL(total)}
               </span>
             </OriginalTotal>
 
@@ -77,23 +77,50 @@ const PurchaseSummary = (props) => {
         )
         : (
           <Total>
-            {toBRL(originalTotal)}
+            {toBRL(total)}
           </Total>
         )}
     </Receipt>
   );
 };
 
+PurchaseSummary.defaultProps = {
+  consultKeys: 0,
+
+  keyUnitPrice: 0,
+
+  total: 0,
+
+  discountedTotal: undefined,
+
+  percentageDiscount: undefined,
+};
+
 PurchaseSummary.propTypes = {
-  totalKeys: PropTypes.number.isRequired,
+  consultKeys: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 
-  keyUnitPrice: PropTypes.number.isRequired,
+  keyUnitPrice: PropTypes.PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 
-  originalTotal: PropTypes.number.isRequired,
+  total: PropTypes.PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 
-  discountedTotal: PropTypes.number.isRequired,
+  discountedTotal: PropTypes.PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 
-  percentageDiscount: PropTypes.number.isRequired,
+  percentageDiscount: PropTypes.PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 };
 
 export default PurchaseSummary;

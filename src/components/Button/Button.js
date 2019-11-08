@@ -19,6 +19,10 @@ const StyledButton = styled.button.attrs((props) => ({
   outline: none;
   color: white;
 
+  ${({ theme }) => theme.breakpoints.down('sm')`
+    width: 75%;
+  `}
+
   ${({ theme }) => css`
     ${theme.typography.button};
   `}
