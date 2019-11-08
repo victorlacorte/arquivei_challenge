@@ -29,6 +29,7 @@ const StyledImg = styled.img`
   width: 30%;
   max-width: 352px;
   height: auto;
+  cursor: pointer;
 
   ${({ theme }) => theme.breakpoints.down('sm')`
     width: 50%;
