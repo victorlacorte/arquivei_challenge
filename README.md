@@ -61,6 +61,8 @@ General form philosophy: no maxLength, normalize to achieve this result
 * Return nav button
 * Provavelmente retirar o código de validação de CNPJ do front
 * Não consigo desabilitar o overflow do body quando a modal é aberta :(
+* Modal de erros!
+* Padronizar os components (styles, etc)
 
 # A note on isomorphic-unfetch
 import fetch from 'isomorphic-unfetch';
