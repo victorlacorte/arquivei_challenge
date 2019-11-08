@@ -4,8 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "next",
-    "build": "next build",
-    "start": "next start",
+    "eslint": "./node_modules/.bin/eslint .",
     "test": "jest",
     "test:watch": "npm test -- --watch"
   },
@@ -44,6 +43,10 @@
       "generalConfig": "<rootDir>/generalConfig",
       "resources/api": "<rootDir>/src/resources/api",
       "components/Button": "<rootDir>/src/components/Button",
+      "components/Footer": "<rootDir>/src/components/Footer",
+      "components/Header": "<rootDir>/src/components/Header",
+      "components/Input": "<rootDir>/src/components/Input",
+      "components/Main": "<rootDir>/src/components/Main",
       "components/PurchaseSummary": "<rootDir>/src/components/PurchaseSummary",
       "commons/styles/theme": "<rootDir>/src/commons/styles/theme",
       "commons/utils/formatting": "<rootDir>/src/commons/utils/formatting",
