@@ -1,5 +1,3 @@
-// TODO sanitize these functions and remove unnecessary ones
-
 function required(value) {
   if (value) {
     return undefined;
@@ -31,16 +29,6 @@ function minNumLength(min) {
   };
 }
 
-function maxLength(max) {
-  return function validate(value) {
-    if (value && value.length > max) {
-      return `São necessários no máximo ${max} caracteres`;
-    }
-
-    return undefined;
-  };
-}
-
 function minValue(min) {
   return function validate(value) {
     if (value && value < min) {
@@ -51,31 +39,20 @@ function minValue(min) {
   };
 }
 
-function maxValue(max) {
-  return function validate(value) {
-    if (value && value > max) {
-      return `Deve ser no máximo ${max}`;
-    }
-
-    return undefined;
-  };
-}
-
-// TODO probably unnecessary
-function email(value) {
-  if (value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-    return 'Email inválido';
+function normalizeAsNumber(value) {
+  if (!value) {
+    return value;
   }
 
-  return undefined;
+  const onlyNums = value.toString().replace(/[^\d]/g, '');
+
+  return onlyNums;
 }
 
 export default {
-  required,
   minLength,
   minNumLength,
-  maxLength,
   minValue,
-  maxValue,
-  email,
+  normalizeAsNumber,
+  required,
 };

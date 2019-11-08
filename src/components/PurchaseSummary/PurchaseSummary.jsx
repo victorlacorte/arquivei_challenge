@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { toBRL } from 'commons/utils/formatting';
+import toBRL from 'commons/utils/formatting';
 
 import {
   DiscountedTotal,
@@ -13,7 +13,7 @@ import {
   Total,
 } from './styles';
 
-const PurchaseSummary = (props) => {
+function PurchaseSummary(props) {
   const {
     consultKeys,
     keyUnitPrice,
@@ -82,7 +82,7 @@ const PurchaseSummary = (props) => {
         )}
     </Receipt>
   );
-};
+}
 
 PurchaseSummary.defaultProps = {
   consultKeys: 0,

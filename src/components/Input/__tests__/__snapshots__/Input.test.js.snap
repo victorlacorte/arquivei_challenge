@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input /> creates a Input component 1`] = `
+<styles__StyledContainer>
+  <styles__StyledTitle />
+  <div>
+    <styles__StyledInput
+      error=""
+      placeholder=""
+      type="text"
+    />
+  </div>
+</styles__StyledContainer>
+`;

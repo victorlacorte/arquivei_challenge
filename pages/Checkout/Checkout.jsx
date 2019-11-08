@@ -84,9 +84,10 @@ function CheckoutForm(props) {
             <Field
               component={Input}
               name="creditCardNumber"
-              type="number"
+              type="text"
               label="Número do cartão de crédito"
               placeholder="Apenas números"
+              normalize={formValidations.normalizeAsNumber}
               validate={[
                 formValidations.required,
               ]}
@@ -108,7 +109,7 @@ function CheckoutForm(props) {
             <Field
               component={Input}
               name="creditCardCVV"
-              type="number"
+              type="text"
               label="CVV"
               placeholder="Apenas números"
               normalize={creditCardValidations.normalizeCVV}
@@ -141,19 +142,9 @@ function CheckoutForm(props) {
           </Button>
 
           <Button
-            color="error"
-            onClick={() => {
-              // limpar o contexto antes de voltar
-              resetCheckout();
-            }}
-          >
-            Reset
-          </Button>
-
-          <Button
             color="success"
             type="submit"
-            disabled={pristine || invalid || submitting}
+            disabled={pristine || invalid || submitting || loading}
           >
             Finalizar compra
           </Button>

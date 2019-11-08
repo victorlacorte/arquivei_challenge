@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Main /> creates a Main component 1`] = `
+<StyledComponent
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "styles__StyledMain-sc-1sa92va-0",
+        "isStatic": false,
+        "rules": Array [
+          "box-sizing:border-box;position:relative;margin:0 auto;min-height:calc(100vh - 92px - 60px);min-width:320px;overflow:hidden;padding:24px;",
+          [Function],
+          " ",
+          [Function],
+          " ",
+          [Function],
+          " ",
+          [Function],
+          " ",
+          [Function],
+        ],
+      },
+      "displayName": "styles__StyledMain",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "styles__StyledMain-sc-1sa92va-0",
+      "target": "main",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+/>
+`;

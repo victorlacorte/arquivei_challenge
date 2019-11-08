@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 
 /**
@@ -18,4 +19,4 @@ const StyledFooter = styled.footer`
   `}
 `;
 
-export default StyledFooter;
+export default memo(StyledFooter);

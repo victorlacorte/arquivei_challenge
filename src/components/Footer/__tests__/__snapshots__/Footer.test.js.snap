@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer /> creates a Footer component 1`] = `
+<StyledComponent
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "styles__StyledFooter-a3uq45-0",
+        "isStatic": false,
+        "rules": Array [
+          "background-color:",
+          [Function],
+          ";box-shadow:0 -3px 5px ",
+          [Function],
+          ";height:60px;z-index:",
+          [Function],
+          ";",
+          [Function],
+        ],
+      },
+      "displayName": "styles__StyledFooter",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "styles__StyledFooter-a3uq45-0",
+      "target": "footer",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+/>
+`;

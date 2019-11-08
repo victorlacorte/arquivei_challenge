@@ -28,7 +28,7 @@ describe('Checkout actions', () => {
 
   it('should create an action to reset the checkout state', () => {
     const expectedAction = {
-      type: types.RESET_STATE,
+      type: types.RESET_CHECKOUT_STATE,
     };
 
     expect(actions.resetState()).toEqual(expectedAction);

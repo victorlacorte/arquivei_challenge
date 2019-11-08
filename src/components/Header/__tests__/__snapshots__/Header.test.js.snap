@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> creates a Header component 1`] = `
+<styles__StyledHeader>
+  <styles__StyledImg
+    alt="Arquivei Lite logo"
+    onClick={[Function]}
+    src="/images/arquivei-lite.gif"
+  />
+</styles__StyledHeader>
+`;

@@ -1,7 +1,7 @@
 import { memo } from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-// TODO add proptype validation? Also needs to be tested
 const StyledButton = styled.button.attrs((props) => ({
   type: props.type || 'button',
   disabled: props.disabled || false,
@@ -51,5 +51,15 @@ const StyledButton = styled.button.attrs((props) => ({
     background-color: ${({ theme }) => theme.palette.grey400.main};
   `}
 `;
+
+StyledButton.propTypes = {
+  type: PropTypes.oneOf(['button', 'submit']),
+
+  disabled: PropTypes.bool,
+
+  variant: PropTypes.oneOf(['contained', 'outlined']),
+
+  color: PropTypes.oneOf(['primary', 'success', 'error', 'alert']),
+};
 
 export default memo(StyledButton);

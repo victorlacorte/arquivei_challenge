@@ -36,7 +36,6 @@ function Consult(props) {
     // form props
     keysAmount,
     submitting,
-    pristine,
     invalid,
 
     // props mapped from store state
@@ -111,9 +110,7 @@ function Consult(props) {
           <Button
             type="submit"
             color="success"
-            // disabled={pristine || invalid || submitting || loading || consultError || total === 0}
-            // disabled={pristine || invalid || consultError || !total}
-            disabled={!total || invalid || submitting || consultError}
+            disabled={!total || invalid || submitting || consultError || loading}
           >
             Comprar
           </Button>

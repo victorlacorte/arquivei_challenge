@@ -42,7 +42,7 @@ describe('Checkout operations', () => {
 
   it('creates RESET_STATE when the checkout needs a reset', () => {
     const expectedActions = [
-      { type: types.RESET_STATE },
+      { type: types.RESET_CHECKOUT_STATE },
     ];
 
     const store = mockStore();

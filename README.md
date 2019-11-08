@@ -1,106 +1,152 @@
-# Usage
-Don't forget the .env file
+# Arquivei Frontend Challenge
 
-# Initial draft
-Whenever the user selects a quantity we need to consult an external endpoint
-that will return us the following (note that, in addition to consulting this
-endpoint, we need to trigger a Redux Form's onChange event with the Field
-(Input) quantity):
+## Solution
 
-1) A price with discount
+The proposed solution requires that, whenever a Lite client inputs a
+consult keys quantity, an external service returns the total price and
+possible discounts as well. This is necessary since the proposed discount
+model varies with the amount of remaining keys:
 
-{
-  "keyUnitPrice": <number>,
-  "total": <number>,
-  "discountedTotal": <number>,
-  "percentageDiscount": <number>
-}
+```javascript
+const discountModel = [
+  {
+    max: 1000,
+    price: 0.09,
+  },
+  {
+    max: 1000,
+    price: 0.16,
+  },
+  {
+    max: Infinity,
+    price: 0.24,
+  },
+];
+```
 
-2) A price without discount
+this data structure would be kept by such external service and, when
+consulted, this service would need to authenticate the request and, if
+a checkout would be performed within a predetermined amount of time (i.e.
+between consulting the price and providing billing info), the remaining
+keys with discount would be further altered to all subsequent requests.
+If the user did not perform a checkout and a timeout was raised, even if
+a later checkout attempt was performed it would return an error since
+the price could then have changed in this time window and the correct
+purchase total would need to be verified again.
 
-{
-  "keyUnitPrice": <number>,
-  "total": <number>
-}
+To achieve such goal a message broker such as [Redis](https://redis.io/)
+could be utilized in the backend service, dealing with concurrent price
+consults and exchanging [JWT](https://jwt.io/) as a mean to validate
+the communication protocol between the client and the broker.
 
-(TODO what happens when it returns nothing at all? Maybe render a snackbar if
-that is the case, and if we have time to create this component)
+In order to accommodate this solution the frontend client would require
+additional authentication and more information would need to be sent
+with every request: as of this current implementation the API is mocked
+and only a suggestion is presented as to how each party would communicate.
+The API calls are present on `src/resources/endpoints` and extending them
+would also require additions on the [duck](https://www.freecodecamp.org/news/scaling-your-redux-app-with-ducks-6115955638be/) directories, present on `pages/Checkout` and `pages/Consult`.
 
-Whenever we receive these values we update our Redux store since these values,
-specifically discountedTotal (when present) or originalTotal will be utilized
-in the checkout form.
+## Installation
 
-Also, when the user types its CNPJ and credit card info, we need to dispatch
-this information, and the order total, to another endpoint.
+Open the (Linux) terminal emulator of choice and type:
 
-So we can name a few actions:
+* `git clone https://github.com/victorlacorte/arquivei_challenge.git && cd arquivei_challenge`
 
-* const SET_CONSULT_KEYS
-* const CHECK_PRICE
-* const COMPLETE_ORDER
+* Create a .env file, for example: `cp .env.example .env`
 
-Optional, but recommended:
+* Install all dependencies: `npm i`
 
-* const IS_LOADING (maybe needs a timeout mechanism)
-* const OPEN_SNACKBAR
-* const CLOSE_SNACKBAR
+* `npm run dev` or `docker-compose up`
 
-# Explain
+* Open a browser and go to `localhost:3000`. The application should be running there!
 
-Project's structure and why index.jsx is an exception
+## Project structure
 
-General form philosophy: no maxLength, normalize to achieve this result
+[Next.js](https://nextjs.org/) has a few conventions, one of which requires
+pages to be on the `pages` directory. There, we will find 3 pages:
 
-# TODO
+* `index.jsx`: a simple redirect to the `/consult` page. The first reason behind this
+decision is that, rather than creating a landing or welcome page, we jump straight
+into the solution to the proposed problem: a "screen to buy consults". The other reason
+is that Arquivei has already deployed the Lite system, so the landing page would be
+unnecessary since it already exists and is much more complex and beyond the scope
+of this simple demonstration.
 
-* Modal
-* CreditCardForm
-* CreditCardReducer
-* Footer
-* SuccessScreen
-* Return nav button
-* Provavelmente retirar o código de validação de CNPJ do front
-* Não consigo desabilitar o overflow do body quando a modal é aberta :(
-* Modal de erros!
-* Padronizar os components (styles, etc)
+* `consult.jsx`: the first page our user iteracts with the system. There, he inputs a
+consulting keys quantity and receives the purchase total, along with the price discount
+(if any).
 
-# A note on isomorphic-unfetch
-import fetch from 'isomorphic-unfetch';
+* `checkout.jsx`: the page where a checkout is made possible, but note that we redirect to
+`/consult` if the user has not selected an amount of keys to buy. This is performed by
+accessing the current value stored in our [Redux](https://redux.js.org/) store; this subject
+will be further explained below.
 
-// https://developer.mozilla.org/en-US/docs/Web/API/Response
-function checkStatus(response) {
-  const { ok, ...rest } = response;
+* `_app.jsx` and `_document.jsx`: The first is required since Next.js utilizes a custom `App`
+to initialize pages, and where we inject the Component that abstracts the page and its props.
+Note that we also provide layout Components such as the Header, Footer and
+the theme provider, which makes the `src/commons/styles/theme.js` available to all our components.
+The latter is necessary since "Next.js skips the definition of
+the surrounding document's markup", and is also where we implement the "wiring" for Server-Side
+Rendering with [styled-components](https://www.styled-components.com/), the CSS-in-JS library of
+choice for this project.
 
-  if (ok) {
-    return rest;
-  }
+Another convention is the `public` folder: there we will encounter static assets such as images,
+fonts which are referenced by the `_document.jsx` and served to the application on demand), and a
+`normalize.css` file which "improves the consistency of different browsers rendering" and makes them
+"in line with modern standards".
 
-  return Promise.reject(rest);
-}
+Aside from these folders we have the `lib`, where we provide Next.js and Redux integration, along with
+a Higher-Order Component that gives access to Redux slices to our connected Components, and the "merging"
+of the different reducers from our application.
 
-// TODO test
-function parseUrlOptions(url, options) {
-  const { params, ...otherOptions } = options;
-  let constructedUrl = url;
+The `src` directory contains the default theme, which is an approximation of the
+[guidelines](https://public.3.basecamp.com/p/6ZtKGQepHiupgVpanxgDWyZg) given to the present challenge,
+form validations, the Components (and their Unit tests) utilized in all pages, and means to perform
+async calls to an external (REST) API. In this case, URLs were generated with [Mocky](https://www.mocky.io/)
+and, in order to simulate different responses and HTTP statuses, these URLs need to be manually changed
+(in practice these endpoints would refer to real backend services so the frontend application
+would only need to consume their response statuses and data, which is what is being simulated).
 
-  if (Object.keys(params).length) {
-    const urlParams = new URLSearchParams(Object.entries(params));
-    constructedUrl += `?${urlParams.toString()}`;
-  }
+Aside from these directories, the root one contains Babel, ESLint, Webpack and other configuration files or
+scripts.
 
-  return [constructedUrl, otherOptions];
-}
+## The App
 
-function customFetch(url, options) {
-  const [parsedUrl, parsedOptions] = parseUrlOptions(url, options);
+Navigation is performed as intuitively as possible (since the project is simple) and by clicking on the Arquivei logo
+the user will be served the `/index` page which, in this case, would simply redirect to `/consult`. Also, since the
+pages are actually [Redux Forms](https://redux-form.com/8.2.2/), navigation requires valid form data and button (which
+remain disabled until a valid data is provided or expected response is received) clicks.
 
-  return fetch(parsedUrl, parsedOptions)
-    .then(checkStatus);
-}
+Speaking of forms, only minimum quantities or lengths are enforced with error messages. Maximum ones are normalized
+so the user experience is further increased.
 
-export default customFetch;
+The `Main` Component limits screen max-width so we have a consistent and easy to extend system: theme breakpoints
+limit content area to 960px so designing pages becomes feasible (fluid designs don't work well with complex or dense
+pages), and responsiveness is achieved with Component's media queries, which mainly target desktop and mobile
+screens.
 
-# Consults algorithm
+Redux debugging is performed via the [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension)
+and no middlewares were added (due to the project's simplicity), but
+[Redux Thunk](https://github.com/reduxjs/redux-thunk) would be a good addition in order to further extend this
+demo and better accommodate Redux side effects logic as well as debounce actions more easily (notice the
+cumbersume but effective `useDebouce` hook on `src/commons/utils;useDebouce.js`: it exists since the `/consult`
+user expectes dynamism between specifying a consult keys amount and receiving the (mocked) purchase price, but
+dispatching requests `onChange` would be a terrible idea since we could easily receive responses out of order due
+to inevitable network latency. By debouncing the action, the user needs to wait a predetermined amount of time
+before the application may respond).
+
+## Wrapping up
+
+This was a brief explanation of the decisions and reasoning behind the proposed solution. Despite its simplicity
+the project demanded various technologies and I hope it is sufficient to show my potential as a frontend developer.
+Thanks in advance for this opportunity!
+
+
+## Appendix
+
+Discount model naive solution/proof of concept and tests:
+
+```javascript
 const discounts = [
   {
     max: 1000,
@@ -116,11 +162,6 @@ const discounts = [
   },
 ];
 
-/**
- *
- * @param {*} numberConsults
- * @param {*} discounts
- */
 function price(numberConsults) {
   let total = 0;
 
@@ -134,8 +175,6 @@ function price(numberConsults) {
   }
 }
 
-import price from '../consults';
-
 describe('Consult keys discount algorithm', () => {
   it('correctly calculates a purchase price', () => {
     expect(price(0)).toEqual(0);
@@ -146,159 +185,4 @@ describe('Consult keys discount algorithm', () => {
     expect(price(10000)).toEqual(2170);
   });
 });
-
-# CNPJ validations
-// Blacklist common values.
-const BLACKLIST = [
-  '0'.repeat(14),
-  '1'.repeat(14),
-  '2'.repeat(14),
-  '3'.repeat(14),
-  '4'.repeat(14),
-  '5'.repeat(14),
-  '6'.repeat(14),
-  '7'.repeat(14),
-  '8'.repeat(14),
-  '9'.repeat(14),
-];
-
-const STRICT_STRIP_REGEX = /[-/.]/g;
-const LOOSE_STRIP_REGEX = /[^\d]/g;
-
-/**
-* Compute the CNPJ's Verifier Digit (or "Dígito Verificador (DV)" in portuguese).
-*
-* More info on [wikipedia (pt-br)](https://pt.wikipedia.org/wiki/D%C3%ADgito_verificador)
-*
-* @param {string} numbers the CNPJ string with only numbers.
-* @returns {number} the verifier digit.
-*/
-function verifierDigit(numbers) {
-  let index = 2;
-  const reverse = numbers.split('').reduce((buffer, number) => [parseInt(number, 10)].concat(buffer), []);
-
-  const sum = reverse.reduce((buffer, number) => {
-    const newBuffer = buffer + number * index;
-
-    index = (index === 9 ? 2 : index + 1);
-
-    return newBuffer;
-  }, 0);
-
-  const mod = sum % 11;
-
-  return (mod < 2 ? 0 : 11 - mod);
-}
-
-/**
-* Remove some characters from the input.
-*
-* Example:
-* ```
-* strip('54550[752#0001..$55'); // Result: '54550752000155'
-* strip('54550[752#0001..$55', true); // Result: '54550[752#0001..$55' - Atention!
-* ```
-*
-* @param {string} cnpj the CNPJ text.
-* @param {boolean} [isStrict] if `true`, it will remove only `.` and `-` characters.
-* Otherwise, it will remove all non-digit (`[^\d]`) characters. Optional.
-* @returns {string} the stripped CNPJ.
-*/
-function strip(cnpj, isStrict) {
-  const regex = isStrict ? STRICT_STRIP_REGEX : LOOSE_STRIP_REGEX;
-
-  return (cnpj || '').toString().replace(regex, '');
-}
-
-/**
-* Transform the input into a pretty CNPJ format.
-*
-* Example:
-* ```
-* format('54550752000155');
-* // Result: '54.550.752/0001-55'
-* ```
-*
-* @param {string} cnpj the CNPJ.
-* @returns {string} the formatted CNPJ.
-*/
-function format(cnpj) {
-  return strip(cnpj).replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3/$4-$5');
-}
-
-/**
-* Validate the CNPJ.
-*
-* @param {string} cnpj the CNPJ number.
-* @param {boolean} [isStrict] if `true`, it will accept only `digits`, `.` and
-* `-` characters. Optional.
-* @returns {boolean} `true` if CNPJ is valid. Otherwise, `false`.
-*/
-function isValidCnpj(cnpj, isStrict) { // eslint-disable-line complexity
-  const stripped = strip(cnpj, isStrict);
-
-  // CNPJ must be defined
-  if (!stripped) { return false; }
-
-  // CNPJ must have 14 chars
-  if (stripped.length !== 14) { return false; }
-
-  // CNPJ can't be blacklisted
-  if (BLACKLIST.includes(stripped)) { rcnpj
-
-  let numbers = stripped.substr(0, 12);cnpj
-  numbers += verifierDigit(numbers);
-  numbers += verifierDigit(numbers);
-
-  return numbers.substr(-2) === stripped.substr(-2);
-}
-
-// cnpj.test.js
-it('blacklists common numbers', () => {
-    expect(cnpj.isValidCnpj('00000000000000')).toBe(false);
-    expect(cnpj.isValidCnpj('11111111111111')).toBe(false);
-    expect(cnpj.isValidCnpj('22222222222222')).toBe(false);
-    expect(cnpj.isValidCnpj('33333333333333')).toBe(false);
-    expect(cnpj.isValidCnpj('44444444444444')).toBe(false);
-    expect(cnpj.isValidCnpj('55555555555555')).toBe(false);
-    expect(cnpj.isValidCnpj('66666666666666')).toBe(false);
-    expect(cnpj.isValidCnpj('77777777777777')).toBe(false);
-    expect(cnpj.isValidCnpj('88888888888888')).toBe(false);
-    expect(cnpj.isValidCnpj('99999999999999')).toBe(false);
-  });
-
-  it('rejects falsy values', () => {
-    expect(cnpj.isValidCnpj('')).toBe(false);
-    expect(cnpj.isValidCnpj(null)).toBe(false);
-    expect(cnpj.isValidCnpj(undefined)).toBe(false);
-  });
-
-  it('validates formatted strings', () => {
-    expect(cnpj.isValidCnpj('54.550.752/0001-55')).toBe(true);
-  });
-
-  it('validates unformatted strings', () => {
-    expect(cnpj.isValidCnpj('54550752000155')).toBe(true);
-  });
-
-  it('validates messed strings', () => {
-    expect(cnpj.isValidCnpj('54550[752#0001..$55')).toBe(true);
-  });
-
-  it('strictly validates strings', () => {
-    expect(cnpj.isValidCnpj('54550[752#0001..$55', true)).toBe(false);
-    expect(cnpj.isValidCnpj('54.550.752/0001-55', true)).toBe(true);
-    expect(cnpj.isValidCnpj('54550752000155', true)).toBe(true);
-  });
-
-  it('returns stripped number', () => {
-    const number = cnpj.strip('54550[752#0001..$55');
-
-    expect(number).toBe('54550752000155');
-  });
-
-  it('returns formatted number', () => {
-    const number = cnpj.format('54550752000155');
-
-    expect(number).toBe('54.550.752/0001-55');
-  });
+```
