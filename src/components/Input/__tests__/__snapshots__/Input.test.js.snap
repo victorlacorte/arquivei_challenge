@@ -5,7 +5,7 @@ exports[`<Input /> creates a Input component 1`] = `
   <styles__StyledTitle />
   <div>
     <styles__StyledInput
-      error={false}
+      error=""
       placeholder=""
       type="text"
     />

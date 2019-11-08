@@ -37,12 +37,36 @@ function Input(props) {
 
 Input.defaultProps = {
   input: {},
+
+  type: 'text',
+
+  label: '',
+
+  placeholder: '',
+
+  meta: {
+    touched: false,
+    error: '',
+    warning: false,
+  },
 };
 
 Input.propTypes = {
   // `input` is generic enough that we only need to ensure that is destructurable
   // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object,
+
+  type: PropTypes.string,
+
+  label: PropTypes.string,
+
+  placeholder: PropTypes.string,
+
+  meta: PropTypes.shape({
+    touched: PropTypes.bool,
+    error: PropTypes.string,
+    warning: PropTypes.bool,
+  }),
 };
 
 export default Input;
