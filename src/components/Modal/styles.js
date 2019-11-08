@@ -20,12 +20,17 @@ const Modal = styled.div`
 const ModalContent = styled.div`
   position: relative;
   width: 50%;
+  max-width: 544px;
   height: 50%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: ${({ theme }) => theme.palette.grey100.main};
-  // padding: 24px;
+  background-color: white;
+
+  ${({ theme }) => theme.breakpoints.down('md')`
+    width: 85%;
+    height: 50%
+  `}
 `;
 
 const ModalTitle = styled.div`
