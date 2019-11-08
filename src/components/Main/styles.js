@@ -14,7 +14,7 @@ const StyledMain = styled.main`
   padding: 24px;
 
   ${({ theme }) => theme.breakpoints.down('sm')`
-    height: calc(100vh - 56px - 40px);
+    min-height: calc(100vh - 56px - 40px);
     padding: 12px;
   `}
 
