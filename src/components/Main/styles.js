@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 
 /**
@@ -35,4 +36,4 @@ const StyledMain = styled.main`
   `}
 `;
 
-export default StyledMain;
+export default memo(StyledMain);
