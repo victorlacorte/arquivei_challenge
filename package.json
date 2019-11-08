@@ -14,6 +14,9 @@
   "license": "ISC",
   "devDependencies": {
     "babel-plugin-styled-components": "^1.10.6",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme-to-json": "^3.4.3",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
@@ -38,8 +41,19 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "config": "<rootDir>/config",
-      "resources/api": "<rootDir>/src/resources/api"
-    }
+      "generalConfig": "<rootDir>/generalConfig",
+      "resources/api": "<rootDir>/src/resources/api",
+      "components/Button": "<rootDir>/src/components/Button",
+      "components/PurchaseSummary": "<rootDir>/src/components/PurchaseSummary",
+      "commons/styles/theme": "<rootDir>/src/commons/styles/theme",
+      "commons/utils/formatting": "<rootDir>/src/commons/utils/formatting",
+      "commons/utils/testUtils": "<rootDir>/src/commons/utils/testUtils"
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }
