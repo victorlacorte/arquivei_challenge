@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PurchaseSummary /> creates a PurchaseSummary component 1`] = `
+<styles__Receipt>
+  <styles__Title>
+    Detalhes da compra
+  </styles__Title>
+  <styles__Table>
+    <thead>
+      <tr>
+        <th>
+          # Chaves
+        </th>
+        <th>
+          Valor unitário
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          0
+        </td>
+        <td>
+          R$ 0,00
+        </td>
+      </tr>
+    </tbody>
+  </styles__Table>
+  <styles__Hr />
+  <styles__Title>
+    Total
+  </styles__Title>
+  <styles__Total>
+    R$ 0,00
+  </styles__Total>
+</styles__Receipt>
+`;
