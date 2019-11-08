@@ -6,6 +6,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import PurchaseSummary from 'components/PurchaseSummary';
+import { StatusModal } from 'components/Modal';
 import useDebounce from 'commons/utils/useDebounce';
 import {
   consultKeysValidations,
@@ -30,7 +31,7 @@ const defaultConsultKeysInfo = {
 
 // TODO tratar serviço indisponível
 // TODO botão para submeter: se a store já possuir um valor, o botão não ficará mais disabled
-function Consults(props) {
+function Consult(props) {
   const {
     // form props
     keysAmount,
@@ -46,6 +47,7 @@ function Consults(props) {
     loading,
     consultError,
     fetchConsultInfo,
+    resetConsult,
   } = props;
 
   const debouncedKeysAmount = useDebounce(keysAmount, 500);
@@ -64,67 +66,73 @@ function Consults(props) {
   }, [debouncedKeysAmount]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Title>
-        Adquira Chaves de Consulta
-      </Title>
+    <>
+      <form onSubmit={handleSubmit}>
+        <Title>Adquira Chaves de Consulta</Title>
 
-      <Panel>
-        <PanelDiv>
-          <Field
-            name="keysAmount"
-            component={Input}
-            type="number"
-            label="Escolha a quantidade de chaves"
-            placeholder="Mínimo de 200 chaves"
-            validate={[
-              formValidations.required,
-              minValue200,
-            ]}
-            normalize={(value) => consultKeysValidations.normalizeConsultKeys(value, 1000000)}
-          />
-        </PanelDiv>
+        <Panel>
+          <PanelDiv>
+            <Field
+              name="keysAmount"
+              component={Input}
+              type="number"
+              label="Escolha a quantidade de chaves"
+              placeholder="Mínimo de 200 chaves"
+              validate={[
+                formValidations.required,
+                minValue200,
+              ]}
+              normalize={(value) => consultKeysValidations.normalizeConsultKeys(value, 1000000)}
+            />
+          </PanelDiv>
 
-        <PanelDiv>
-          {debouncedKeysAmount && !invalid
-            ? (
-              <PurchaseSummary
-                consultKeys={keysAmount}
-                keyUnitPrice={keyUnitPrice}
-                total={total}
-                discountedTotal={discountedTotal}
-                percentageDiscount={percentageDiscount}
-              />
-            )
-            : (
-              <PurchaseSummary
-                consultKeys={0}
-                keyUnitPrice={0}
-                total={0}
-              />
-            )}
-        </PanelDiv>
-      </Panel>
+          <PanelDiv>
+            {debouncedKeysAmount && !invalid
+              ? (
+                <PurchaseSummary
+                  consultKeys={keysAmount}
+                  keyUnitPrice={keyUnitPrice}
+                  total={total}
+                  discountedTotal={discountedTotal}
+                  percentageDiscount={percentageDiscount}
+                />
+              )
+              : (
+                <PurchaseSummary
+                  consultKeys={0}
+                  keyUnitPrice={0}
+                  total={0}
+                />
+              )}
+          </PanelDiv>
+        </Panel>
 
-      {consultError && <div>Serviço indisponível. Tente novamente mais tarde!</div>}
+        <ButtonContainer>
+          <Button
+            type="submit"
+            color="success"
+            // disabled={pristine || invalid || submitting || loading || consultError || total === 0}
+            // disabled={pristine || invalid || consultError || !total}
+            disabled={!total || invalid || submitting || consultError}
+          >
+            Comprar
+          </Button>
+        </ButtonContainer>
+      </form>
 
-      <ButtonContainer>
-        <Button
-          type="submit"
-          // disabled={pristine || invalid || submitting || loading || consultError || total === 0}
-          // disabled={pristine || invalid || consultError || !total}
-          disabled={!total || invalid || submitting || consultError}
-        >
-          Comprar
-        </Button>
-      </ButtonContainer>
-    </form>
+      <StatusModal
+        variant="error"
+        open={consultError}
+        message="Preço indisponível. Tente novamente!"
+        onClose={resetConsult}
+      />
+    </>
   );
 }
 
 const ConsultsForm = reduxForm({
   form: 'consultsForm',
-})(Consults);
+})(Consult);
 
 const selector = formValueSelector('consultsForm');
 

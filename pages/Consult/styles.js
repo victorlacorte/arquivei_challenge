@@ -22,8 +22,9 @@ const Panel = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-margin-top: 48px;
-text-align: center;
+  margin-top: 48px;
+  margin-bottom: 24px;
+  text-align: center;
 `;
 
 export {

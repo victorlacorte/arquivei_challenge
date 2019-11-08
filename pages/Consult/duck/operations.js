@@ -5,6 +5,7 @@ import creators from './actions';
 const {
   requestConsultInfo,
   receiveConsultInfo,
+  resetState,
   setInvalidConsultInfo,
 } = creators;
 
@@ -20,6 +21,11 @@ function fetchConsultInfo(dispatch, numOfKeys, defaultInfo) {
     });
 }
 
+function resetConsult(dispatch) {
+  dispatch(resetState());
+}
+
 export default {
   fetchConsultInfo,
+  resetConsult,
 };

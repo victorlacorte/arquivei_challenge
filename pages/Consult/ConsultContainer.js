@@ -32,8 +32,13 @@ function mapDispatchToProps(dispatch) {
     consultOperations.fetchConsultInfo(dispatch, amount, defaultInfo);
   }
 
+  function resetConsult() {
+    consultOperations.resetConsult(dispatch);
+  }
+
   return {
     fetchConsultInfo,
+    resetConsult,
   };
 }
 

@@ -21,8 +21,15 @@ function setInvalidConsultInfo(info) {
   };
 }
 
+function resetState() {
+  return {
+    type: types.RESET_STATE,
+  };
+}
+
 export default {
   requestConsultInfo,
   receiveConsultInfo,
+  resetState,
   setInvalidConsultInfo,
 };

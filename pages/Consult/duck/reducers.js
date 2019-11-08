@@ -29,6 +29,10 @@ function consultReducer(state = INITIAL_STATE, action) {
       };
     }
 
+    case types.RESET_STATE: {
+      return INITIAL_STATE;
+    }
+
     case types.SET_INVALID_CONSULT_INFO: {
       return {
         ...state,
