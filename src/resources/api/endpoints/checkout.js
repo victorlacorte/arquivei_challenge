@@ -5,7 +5,7 @@ import Api from '../base';
  * 500 -> {}: http://www.mocky.io/v2/5dc331b52f0000aa014be680
  */
 function performCheckout(total, userInfo) {
-  return Api.request('http://www.mocky.io/v2/5dc1b53233000021091a54f1', {
+  return Api.request('http://www.mocky.io/v2/5dc331e42f0000ac044be681', {
     method: 'POST',
     data: {
       total,
